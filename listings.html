@@ -1,0 +1,22 @@
+<div class="carousel">
+<div class="tab left">&lt;</div>
+<div class="tab right">&gt;</div>
+<div class="images">
+<div class="imageholder">
+{% for apt in apts %}
+<img ondragstart='return false;' src='/r/images/{{apt.img}}/1.jpg' />
+{% endfor %}
+</div>
+</div>
+<div id="thumbnails"></div>
+</div>
+<div class="maintext">
+{% for apt in apts %}
+<div class="details">
+<a id="title" href="{{apt.url}}">{{apt.title}}</a>
+<br>{{apt.availability}}<br>
+{{apt.price}} <a href="{{apt.url}}">(link to listing)</a><br>
+{{apt.maintext}}
+</div>
+{% endfor %}
+</div>

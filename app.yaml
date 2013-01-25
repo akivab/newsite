@@ -1,0 +1,11 @@
+application: dan-bamberger 
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /r
+  static_dir: resources
+
+- url: .*
+  script: index.py

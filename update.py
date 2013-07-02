@@ -1,7 +1,7 @@
 import urllib2,re,os
 from HTMLParser import HTMLParser
 
-listings = 'http://www.citi-habitats.com/agent_profile.php?id=BAM'
+listings = 'http://www.citi-habitats.com/real-estate-agents/profiles/Dan-Bamberger-569240'
 newsletters = 'http://us2.campaign-archive1.com/home/?u=f832646624bdbf8d1d0cd3146&id=9ff3e65fde'
 def enum(**enums):
     return type('Enum', (), enums)
@@ -15,7 +15,7 @@ class LinkParser(HTMLParser):
     amap = {'class': None, 'title':None, 'href':None}
     for i in attrs: amap[i[0]] = i[1]
     if not amap['href']: return
-    m = re.match('viewsales.php\?adID=(\d+)', amap['href'])
+    m = re.search('viewsales.php\?adID=(\d+)', amap['href'])
     if m: self.listings[m.group(1)] = 1
     m = re.search('eepurl.com', amap['href'])
     if m and self.lastDate:
@@ -40,7 +40,7 @@ class ListingParser(HTMLParser):
     amap = {'class':None,'name':None, 'style':None}
     self.act = None
     for i in attrs: amap[i[0]] = i[1]
-    if amap['class'] == 'listing_title':
+    if amap['class'] in ['listing_title', 'listing_h1']:
       self.act = Types.TITLE
     elif amap['class'] == 'listing_price':
       self.act = Types.PRICE
@@ -84,10 +84,11 @@ def getImgs(imgs, key):
   os.makedirs(directory)
   count = 1
   for img in imgs:
-    f = open('resources/images/%s/%d.jpg' % (key, count), 'w')
-    f.write(urllib2.urlopen(img).read())
-    f.close()
-    count += 1
+    if re.match('http', img):
+      f = open('resources/images/%s/%d.jpg' % (key, count), 'w')
+      f.write(urllib2.urlopen(img).read())
+      f.close()
+      count += 1
     
 def getListing(key):
   page = 'http://www.citi-habitats.com/viewsales.php?adID=%s' % key
@@ -103,11 +104,14 @@ def getListing(key):
   f.close()
   getImgs([i for i in parser.imgs], key)
 
-#parser = AllListingsParser()
-#parser.feed(urllib2.urlopen(listings).read())
-#for key in parser.listings:
-#  getListing(key)
-
+parser = LinkParser()
+data = urllib2.urlopen(listings).read()
+print data
+parser.feed(data)
+for key in parser.listings:
+  print key
+  getListing(key)
+'''
 parser = LinkParser()
 parser.feed(urllib2.urlopen(newsletters).read())
 for url in parser.newsletters:
@@ -121,4 +125,4 @@ for url in parser.newsletters:
   for i in [title,url,date,parser2.imgsrc,text]:
     f.write('%s\n' % i)
   f.close()
-
+'''

@@ -29,22 +29,26 @@ function addThumbnails() {
   $("#thumbnails").empty();
   var img = imgs[num];
   var imageSrc = img.slice(0,-5);
-  var addPic = function(count) {
+  var tryToAdd = function(i) {
     var tmp = document.createElement('img');
-    tmp.src = imageSrc + count + '.jpg';
-    tmp.onload = function(){ addPic(count+1); $(tmp).addClass(count === 1 ? 'selectedimg' : 'unselectedimg'); $("#thumbnails").append(tmp); };
-    tmp.onclick = function(){ changePic(count,imageSrc + count + '.jpg'); };
-    tmp.onerror = function(){};
+    var img = new Image();
+    img.src = imageSrc + i + '.jpg';
+    tmp.src = '/r/images/bgtile.jpg';
+    $("#thumbnails").append(tmp);
+    tmp.onclick = function(){ changePic(i, tmp.src); };
+    img.onload = function(){ $(tmp).addClass(i === 1 ? 'selectedimg' : 'unselectedimg'); tmp.src = img.src; }
+    img.onerror = function(){ $(tmp).remove(); };
   };
-  addPic(1);
+  for (var i = 1; i <= 3; ++i) {
+    tryToAdd(i);
+  }
 }
 
-
-function changePic(count,url) {
+function changePic(count, url) {
   $('#thumbnails > img').removeClass('selectedimg').addClass('unselectedimg');
-$('#thumbnails :nth-child('+count+')').removeClass('unselectedimg').addClass('selectedimg');
+  $('#thumbnails :nth-child('+count+')').removeClass('unselectedimg').addClass('selectedimg');
   var img = $('.imageholder :nth-child('+(num+1)+')');
-  img[0].src = url;
+  img.attr('src', url);
 }
 
 var Swiper = function(img) {
@@ -72,7 +76,7 @@ Swiper.prototype.up = function(evt) {
 window.onload = function() {
   var tabs = document.getElementsByClassName('tab');
   var imageholder = document.getElementsByClassName('imageholder')[0];
-  if (!imageholder) return;
+  if (!imageholder || !tabs.length) return;
   max = imageholder.children.length;
   imageholder.style.width = (max*100) + "%";
   tabs[0].addEventListener('click', function() {

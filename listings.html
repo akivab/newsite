@@ -4,11 +4,12 @@
 <div class="images">
 <div class="imageholder">
 {% for apt in apts %}
-<img ondragstart='return false;' src='/r/images/{{apt.img}}/1.jpg' />
+<img ondragstart='return false;' src='/r/images/bgtile.jpg' onload='this.src="/r/images/{{apt.img}}/1.jpg"; this.onload=null;' />
 {% endfor %}
 </div>
 </div>
-<div id="thumbnails"></div>
+<div id="thumbnails">
+</div>
 </div>
 <div class="maintext">
 {% for apt in apts %}

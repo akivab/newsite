@@ -4,7 +4,7 @@ from google.appengine.ext.webapp import template
 from django.utils import simplejson as json
 import urllib, os, re
 from google.appengine.api import mail
-from google.appengine.api import memcache
+from random import random
 
 class MainPage(webapp.RequestHandler):
   def post(self):
@@ -23,14 +23,11 @@ class MainPage(webapp.RequestHandler):
       self.redirect('http://www.citi-habitats.com/agent_profile.php?id=BAM')
     page = 'home.html'
     template_data = {}
+    template_data['random'] = int(random() * 10**9)
     paths = ['buyers', 'about', 'contact', 'listings', 'thereport', 'sellers']
     for p in paths:
       if re.match('/%s' % p, self.request.path):
         page = '%s.html' % p
-#    rendered_page = memcache.get(page)
-#    if rendered_page is not None:
-#      self.response.out.write(rendered_page)
-#      return
     if page == 'listings.html':
       aptspath = os.path.join(os.path.dirname(__file__), 'data/listings/')
       aptdir = os.listdir(aptspath)
@@ -40,7 +37,7 @@ class MainPage(webapp.RequestHandler):
       for apt in sorted(aptdir):
         lines = open('%s/%s' % (aptspath, apt), 'r').readlines()
         url,title,availability,price,maintext = lines[:5]
-        img = '%s/' % apt[:-4]
+        img = apt[:-4]
         color = 'green'
         if not re.search('vailable', availability): color='red'
         availability = '<span style="color:%s">%s</span>' % (color,availability)
@@ -65,7 +62,6 @@ class MainPage(webapp.RequestHandler):
     template_data['PAGE'] = page
     path = os.path.join(os.path.dirname(__file__), 'index.html') 
     rendered_page = template.render(path, template_data)
-    memcache.add(page, rendered_page, 7200)
     self.response.out.write(rendered_page)
 
 application = webapp.WSGIApplication(

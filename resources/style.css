@@ -3,7 +3,7 @@
   z-index:-1;
   width:100%;
   height:100%;
-}
+} 
 
 .background > img {
   width:100%;
@@ -11,7 +11,7 @@
 }
 
 .main,.footer,.contactme > div, .top {
-  font-family:'Arvo' serif;
+    font-family:'Arvo' serif;
 }
 
 .maintext, .newsletter{
@@ -22,6 +22,11 @@
 .main,.footer{
   width:940px;
   color:white;
+}
+
+a {
+  text-decoration: none;
+  color:#09f;
 }
 
 
@@ -100,11 +105,11 @@
 
 .header > a, .header > a:hover {
   color:white;
-  text-decoration:none;
   padding:20px;
   display:inline-block;
   height:30px;
   background:rgba(256,256,256,0.0);
+  text-decoration: none;
   -webkit-transition:all 0.3s;
   transition:all 0.3s;
 }
@@ -279,4 +284,5 @@ a.selected, .header > a:hover{
 .newsletter > .text > h3 > a{
   color:#09f;
   font-family:'Arvo' serif;
+  font-size: 24px;
 }

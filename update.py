@@ -104,6 +104,7 @@ def getListing(key):
   f.close()
   getImgs([i for i in parser.imgs], key)
 
+
 parser = LinkParser()
 data = urllib2.urlopen(listings).read()
 print data
@@ -111,7 +112,7 @@ parser.feed(data)
 for key in parser.listings:
   print key
   getListing(key)
-'''
+
 parser = LinkParser()
 parser.feed(urllib2.urlopen(newsletters).read())
 for url in parser.newsletters:
@@ -125,4 +126,4 @@ for url in parser.newsletters:
   for i in [title,url,date,parser2.imgsrc,text]:
     f.write('%s\n' % i)
   f.close()
-'''
+

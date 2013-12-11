@@ -13,6 +13,7 @@ function adjust(opt_num) {
   var tabs = document.getElementsByClassName('tab');
   var imageHolder = $('.imageholder')[0];
   imageHolder.style['-webkit-transform'] = 'translateX(-'+(num * 100 / max)+'%)';
+  imageHolder.style['transform'] = 'translateX(-'+(num * 100 / max)+'%)';
   tabs[0].style.visibility = (num === 0) ? 'hidden' : 'visible';
   tabs[1].style.visibility = (num === max-1) ? 'hidden' : 'visible';
  $('.maintext').children().css('display', 'none');

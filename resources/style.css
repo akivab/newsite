@@ -10,11 +10,11 @@
   height:100%;
 }
 
-.main,.footer,.contactme > div, .top {
-    font-family:'Arvo' serif;
+a,.main,.footer,.contactme > div, .top {
+  font-family:'Arvo', serif;
 }
 
-.maintext, .newsletter{
+.maintext, .newsletter, h1, h2, h3, h4, h5 {
   font-family:'Open Sans', sans-serif;
 }
 
@@ -78,11 +78,14 @@ a {
   position:relative;
   overflow:hidden;
   -webkit-transition:height 0.5s;
+  transition:height 0.5s;
 }
 
 .imageholder {
   -webkit-transform:translateX(0%);
   -webkit-transition:-webkit-transform 0.3s ease-in;
+  transform: translateX(0%);
+  transition: transform 0.3s ease-in;         
 }
 
 .imageholder > img { 

@@ -1,0 +1,23 @@
+<div class="newsletters">
+  {% for newsletter in newsletters %}
+  <div class="newsletter">
+    <a href="{{ newsletter.link }}">
+      <div class="imgdiv"
+      style="background-image:url({{ newsletter.images.0 }});">&nbsp;
+    </div>
+  </a>
+
+  <div class="text">
+    <h3>
+      <a href="{{ newsletter.link }}">
+        {{ newsletter.title }}
+      </a>
+    </h3>
+    {% if newsletter.date_posted %}
+    <span class="date">Posted on {{newsletter.date_posted}}</span>
+    {% endif %}
+    <div>{{newsletter.text|safe}}</div>
+  </div>
+</div>
+{% endfor %}
+</div>

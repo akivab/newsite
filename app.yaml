@@ -1,6 +1,7 @@
-application: dan-bamberger 
-version: 1
-runtime: python
+application: s~dan-bamberger 
+version: 2
+runtime: python27
+threadsafe: no
 api_version: 1
 
 default_expiration: "1s"
@@ -9,5 +10,23 @@ handlers:
 - url: /r
   static_dir: resources
 
+- url: /editor
+  static_files: editor/index.html
+  upload: editor/index.html
+  login: admin
+
+- url: /items
+  script: index.app
+  login: admin
+
 - url: .*
-  script: index.py
+  script: index.app
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+
+builtins:
+- remote_api: on

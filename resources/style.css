@@ -156,14 +156,22 @@ a.selected, .header > a:hover{
 .contactme {
   position:absolute;
   bottom:30px;
-  right:50px;
+  left: 15px;
   text-align:center;
+  width: 900px;
 }
 
 .contactme > a {
   font-size:24px;
   color:black;
-  margin-left:30px;
+}
+
+.contactme .email {
+  float: left;
+}
+
+.contactme .phonenumber {
+  float: right;
 }
 
 .top > span{

@@ -13,11 +13,11 @@ handlers:
 - url: /editor
   static_files: editor/index.html
   upload: editor/index.html
-  login: admin
+  login: required
 
 - url: /items
   script: index.app
-  login: admin
+  login: required
 
 - url: .*
   script: index.app

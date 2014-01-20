@@ -1,10 +1,11 @@
+from google.appengine.api import mail
+from google.appengine.api import users
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import template
-import urllib, os, re
-from google.appengine.api import mail
 import logging
 import json
 from models import *
+import urllib, os, re
 
 import jinja2
 import webapp2
@@ -14,6 +15,10 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
+
+ALLOWED_USERS = ['dan@danbamberger.com',
+                 'akiva.bamberger@gmail.com',
+                 'akivab@google.com']
 
 def json_dump(model):
   return {
@@ -30,10 +35,16 @@ def json_dump(model):
 
 class ItemHandler(webapp2.RequestHandler):
   def get(self):
+    if users.get_current_user().email().lower() not in ALLOWED_USERS:
+      self.error(404)
+      return
     items = Item.query().fetch(1000)
     self.response.out.write(json.dumps([json_dump(item) for item in items]))
 
   def post(self):
+    if users.get_current_user().email().lower() not in ALLOWED_USERS:
+      self.error(404)
+      return
     if self.request.get('id'):
       item = ndb.Key('Item', int(self.request.get('id'))).get()
       if self.request.get('action') == 'DELETE':

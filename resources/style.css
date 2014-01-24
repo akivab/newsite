@@ -238,6 +238,16 @@ a.selected, .header > a:hover{
   width:200px;
 }
 
+.rented {
+  margin-left:30px;
+}
+
+.newsletter .imgdiv.rented {
+  width:75px;
+  height:75px;
+  background-size:100px;
+}
+
 .imgdiv {
   margin-right:30px;
   margin-left:30px;

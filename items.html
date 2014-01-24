@@ -20,4 +20,25 @@
   </div>
 </div>
 {% endfor %}
+
+{% if rented %}
+<h1 class="rented">Rented</h1>
+{% for apt in rented %}
+  <div class="newsletter">
+    <a href="{{ apt.link }}">
+      <div class="imgdiv rented"
+      style="background-image:url({{ apt.images.0 }});">&nbsp;
+    </div>
+  </a>
+<div class="text">
+  <h3>
+    <a href="{{ apt.link }}">
+      {{ apt.title }}
+    </a>
+  </h3>
+</div>
+</div>
+{% endfor %}
+{% endif %}
+
 </div>

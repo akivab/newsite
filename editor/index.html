@@ -31,12 +31,12 @@
       $scope.add_item = {
         title: 'Test post',
         date_posted: $filter('date')(new Date(), 'MM/dd/yy'),
-        images: 'http://localhost:8080/r/images/logo2.png,http://localhost:8080/r/images/citi_logo.png',
-        text: 'Submit me plz',
+        images: '',
+        text: '',
         page: 'listings'
       };
 
-      $scope.page_options = ['listings', 'thereport'];
+      $scope.page_options = ['listings', 'thereport', 'rented'];
       $scope.page_filter = 'listings';
       $http({url: '/items', method:'GET'}).success(function(data){
         $scope.items = data;
@@ -110,24 +110,29 @@
           !$scope.add_item.date_posted ||
           !$scope.add_item.images) {
           alert('Need more stuff!');
-        return;
-      }
+          return;
+        }
       
-      $http({url: '/items', method:'POST', params: {
-        link: $scope.add_item.link,
-        page: $scope.add_item.page,
-        date_posted: $scope.add_item.date_posted,
-        images: $scope.add_item.images,
-        text: $scope.add_item.text,
-        title: $scope.add_item.title
-      }}).success(function(data){
-        $scope.items.push(data);
-        $scope.add_item = {};
-        alert('Added item OK!');
-      }).error(function(data){
-        alert('Error adding.');
-      });
-    }
+        $http({url: '/items', method:'POST', params: {
+          link: $scope.add_item.link,
+          page: $scope.add_item.page,
+          date_posted: $scope.add_item.date_posted,
+          images: $scope.add_item.images,
+          text: $scope.add_item.text,
+          title: $scope.add_item.title
+        }}).success(function(data){
+          $scope.items.push(data);
+          $scope.add_item = {};
+          alert('Added item OK!');
+        }).error(function(data){
+          alert('Error adding.');
+        });
+    };
+
+    $scope.shouldHide = function(item) {
+      console.log(item.page);
+      return item.page == 'rented';
+    };
   }
 </script>
 </head>
@@ -139,12 +144,13 @@
       <div ng-class="{ hidden: !add_item.show, form: add_item.show }">
         <input class="form-control" type="text" ng-model="add_item.title" placeholder="Title"><br/>
         <select class="form-control" ng-model="add_item.page" ng-options="v for v in page_options"></select><br/>
-        <input class="form-control" type="text" ng-model="add_item.link" placeholder="Link to article"><br/>
-        <input class="form-control" type="text" ng-model="add_item.date_posted" placeholder="Date posted"><br/>
+        <input class="form-control" type="text" ng-model="add_item.link" placeholder="Link to landing page"><br/>
         <input class="form-control"  type="text" ng-model="add_item.images" placeholder="Images (comma separated)"><br/>
         Images: <img ng-repeat="image in get_images(add_item)" ng-src="{{ image }}"/>
-        <textarea class="form-control" ng-model="add_item.text" placeholder="Snippet"></textarea>
-
+        <div ng-hide="shouldHide(add_item)">
+          <input class="form-control" type="text" ng-model="add_item.date_posted" placeholder="Date posted"><br/>
+          <textarea class="form-control" ng-model="add_item.text" placeholder="Snippet"></textarea>
+        </div>
         <button ng-click="add()">Add item</button>
       </div>
     </div>
@@ -159,14 +165,16 @@
       <div ng-class="{ hidden: !edit_item.show, form: edit_item.show }">
         <input class="form-control" type="text" ng-model="edit_item.title" placeholder="Title"><br/>
         <select class="form-control" ng-model="edit_item.page" ng-options="v for v in page_options"></select><br/>
-        <input class="form-control" type="text" ng-model="edit_item.link" placeholder="Link to article"><br/>
-        <input class="form-control" type="text" ng-model="edit_item.date_posted" placeholder="Date posted"><br/>
+        <input class="form-control" type="text" ng-model="edit_item.link" placeholder="Link to landing page"><br/>
         <input class="form-control"  type="text" ng-model="edit_item.images" placeholder="Images (comma separated)"><br/>
-        <textarea class="form-control" ng-model="edit_item.text" placeholder="Snippet"></textarea>
         Images: <img ng-repeat="image in get_images(edit_item)" ng-src="{{ image }}"/><br/>
+
+        <div ng-hide="shouldHide(edit_item)">
+          <input class="form-control" type="text" ng-model="edit_item.date_posted" placeholder="Date posted"><br/>
+          <textarea class="form-control" ng-model="edit_item.text" placeholder="Snippet"></textarea>
+        </div>
         <button ng-click="edit(edit_item)">Edit</button>
         <button ng-click="delete(edit_item)">Delete</button>
-      </div>
     </div>
   </div>
 </body>

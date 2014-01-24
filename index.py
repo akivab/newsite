@@ -104,6 +104,8 @@ class MainHandler(webapp2.RequestHandler):
     if page in ['listings', 'thereport']:
       template_data['PAGE'] = 'items.html'
       template_data['newsletters'] = Item.gql('WHERE page=:1 order by ranking desc', page).fetch(1000)
+      if page == 'listings':
+        template_data['rented'] = Item.gql('WHERE page=:1 order by ranking desc', 'rented').fetch(1000)
     else:
       template_data['PAGE'] = '%s.html' % page
     path = os.path.join(os.path.dirname(__file__), 'index.html') 

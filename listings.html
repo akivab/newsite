@@ -20,4 +20,9 @@
 {{apt.maintext}}
 </div>
 {% endfor %}
+
+<h1 class="rented">Rented</h1>
+{% for apt in rented %}
+<a id="title" href="{{apt.url}}">{{apt.title}}</a>
+{% endfor %}
 </div>

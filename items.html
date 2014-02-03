@@ -1,3 +1,19 @@
+{% if path == 'thereport' %}
+<div class="subscribe">
+<div id='emailAlert' style='display:none' class='alert alert-success'>Thanks for subscribing!</div>
+<form action="http://citi-habitats.us1.list-manage.com/subscribe/post" method="post"
+      target="_blank" onsubmit="$('#emailAlert').show()">
+  <div class="input-append">
+    <input type="hidden" name="u" value="a4c9bff28500bdb1cc6e1f865"/>
+    <input type="hidden" name="id" value="ae9271abdb"/>
+    <input class="form-control required"
+           type="email" name="MERGE0" id="MERGE0" value placeholder="Email address" name="email"/>
+    <button type="submit" class="btn">Subscribe</button>
+  </div>
+</form>
+</div>
+{% endif %}
+
 <div class="newsletters">
   {% for newsletter in newsletters %}
   <div class="newsletter">
@@ -22,23 +38,20 @@
 {% endfor %}
 
 {% if rented %}
-<h1 class="rented">Rented</h1>
+<div class="all_closed">
 {% for apt in rented %}
-  <div class="newsletter">
-    <a href="{{ apt.link }}">
-      <div class="imgdiv rented"
-      style="background-image:url({{ apt.images.0 }});">&nbsp;
-    </div>
-  </a>
-<div class="text">
-  <h3>
-    <a href="{{ apt.link }}">
-      {{ apt.title }}
-    </a>
-  </h3>
-</div>
+<div class="closed">
+  <div class="ribbon"></div>
+  <a href="{{ apt.link }}">
+    <div class="image"
+    style="background-image:url({{ apt.images.0 }});">&nbsp;
+  </div>
+  {{ apt.title }}
+</a>
 </div>
 {% endfor %}
+</div>
+<div style="clear:both"></div>
 {% endif %}
 
 </div>

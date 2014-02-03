@@ -106,13 +106,6 @@
       };
 
       $scope.add = function() {
-        if (!$scope.add_item.link ||
-          !$scope.add_item.date_posted ||
-          !$scope.add_item.images) {
-          alert('Need more stuff!');
-          return;
-        }
-      
         $http({url: '/items', method:'POST', params: {
           link: $scope.add_item.link,
           page: $scope.add_item.page,

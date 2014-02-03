@@ -90,13 +90,10 @@ class MainHandler(webapp2.RequestHandler):
 
 
   def get(self):
-    userAgent = self.request.headers['User-Agent']
-    if "Windows" in userAgent and "MSIE" in userAgent:
-      self.redirect('http://www.citi-habitats.com/agent_profile.php?id=BAM')
     page = 'home'
     template_data = {}
 
-    paths = ['buyers', 'about', 'contact', 'listings', 'thereport', 'sellers']
+    paths = ['buyers', 'about', 'contact', 'listings', 'thereport', 'sellers', 'press']
     for p in paths:
       if re.match('/%s' % p, self.request.path):
         page = p
@@ -106,8 +103,20 @@ class MainHandler(webapp2.RequestHandler):
       template_data['newsletters'] = Item.gql('WHERE page=:1 order by ranking desc', page).fetch(1000)
       if page == 'listings':
         template_data['rented'] = Item.gql('WHERE page=:1 order by ranking desc', 'rented').fetch(1000)
+        if len(template_data['rented']) == 0:
+          template_data['rented'] = [{
+            'link': '/r/images/selling.jpg',
+            'images': ['/r/images/selling.jpg'],
+            'title': 'Best apartment in the world'
+          }] * 10 + [{
+            'link': '/r/images/selling.jpg',
+            'images': ['/r/images/selling.jpg'],
+            'title': 'Best apartment in the world'
+          }]
+          logging.info(template_data['rented'])
     else:
       template_data['PAGE'] = '%s.html' % page
+    template_data['path'] = page
     path = os.path.join(os.path.dirname(__file__), 'index.html') 
     rendered_page = template.render(path, template_data)
     self.response.out.write(rendered_page)

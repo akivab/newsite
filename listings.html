@@ -1,28 +1,28 @@
 <div class="carousel">
-<div class="tab left">&lt;</div>
-<div class="tab right">&gt;</div>
-<div class="images">
-<div class="imageholder">
-{% for apt in apts %}
-<img ondragstart='return false;' src='/r/images/bgtile.jpg' onload='this.src="/r/images/{{apt.img}}/1.jpg"; this.onload=null;' />
-{% endfor %}
-</div>
-</div>
-<div id="thumbnails">
-</div>
+  <div class="tab left">&lt;</div>
+  <div class="tab right">&gt;</div>
+  <div class="images">
+    <div class="imageholder">
+      {% for apt in apts %}
+      <img ondragstart='return false;' src='/r/images/bgtile.jpg' onload='this.src="/r/images/{{apt.img}}/1.jpg"; this.onload=null;' />
+      {% endfor %}
+    </div>
+  </div>
+  <div id="thumbnails">
+  </div>
 </div>
 <div class="maintext">
-{% for apt in apts %}
-<div class="details">
-<a id="title" href="{{apt.url}}">{{apt.title}}</a>
-<br>{{apt.availability}}<br>
-{{apt.price}} <a href="{{apt.url}}">(link to listing)</a><br>
-{{apt.maintext}}
-</div>
-{% endfor %}
+  {% for apt in apts %}
+  <div class="details">
+    <a id="title" href="{{apt.url}}">{{apt.title}}</a>
+    <br>{{apt.availability}}<br>
+    {{apt.price}} <a href="{{apt.url}}">(link to listing)</a><br>
+    {{apt.maintext}}
+  </div>
+  {% endfor %}
 
-<h1 class="rented">Rented</h1>
-{% for apt in rented %}
-<a id="title" href="{{apt.url}}">{{apt.title}}</a>
-{% endfor %}
+  <h1 class="rented">Rented</h1>
+  {% for apt in rented %}
+  <a id="title" href="{{apt.url}}">{{apt.title}}</a>
+  {% endfor %}
 </div>

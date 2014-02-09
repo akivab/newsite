@@ -1,11 +1,11 @@
 {% if path == 'thereport' %}
 <div class="subscribe">
 <div id='emailAlert' style='display:none' class='alert alert-success'>Thanks for subscribing!</div>
-<form action="http://citi-habitats.us1.list-manage.com/subscribe/post" method="post"
+<form action="http://danbamberger.us2.list-manage.com/subscribe/post" method="post"
       target="_blank" onsubmit="$('#emailAlert').show()">
   <div class="input-append">
-    <input type="hidden" name="u" value="a4c9bff28500bdb1cc6e1f865"/>
-    <input type="hidden" name="id" value="ae9271abdb"/>
+    <input type="hidden" name="u" value="f832646624bdbf8d1d0cd3146"/>
+    <input type="hidden" name="id" value="f6d1f4b407"/>
     <input class="form-control required"
            type="email" name="MERGE0" id="MERGE0" value placeholder="Email address" name="email"/>
     <button type="submit" class="btn">Subscribe</button>
@@ -30,24 +30,21 @@
       </a>
     </h3>
     {% if newsletter.date_posted %}
-    <span class="date">Posted on {{newsletter.date_posted}}</span>
+    <div class="date">Posted on {{newsletter.date_posted}}</div>
     {% endif %}
     <div>{{newsletter.text|safe}}</div>
   </div>
 </div>
 {% endfor %}
 
-{% if rented %}
+{% if closed %}
 <div class="all_closed">
-{% for apt in rented %}
+  <h3 class="nobg">Recently closed sales</h3>
+{% for apt in closed %}
 <div class="closed">
-  <div class="ribbon"></div>
   <a href="{{ apt.link }}">
-    <div class="image"
-    style="background-image:url({{ apt.images.0 }});">&nbsp;
-  </div>
-  {{ apt.title }}
-</a>
+    {{ apt.title }}
+  </a>
 </div>
 {% endfor %}
 </div>

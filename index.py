@@ -83,7 +83,7 @@ class MainHandler(webapp2.RequestHandler):
     phone = self.request.get("phone")
     message = self.request.get("message")
     mail.send_mail(sender="akivab@google.com",
-                   to="dbamberger7@gmail.com,akiva.bamberger@gmail.com",
+                   to="dan@thebambergergroup.com,akiva.bamberger@gmail.com",
                    subject="Message from danbamberger.com",
                    body="Sent from %s (%s, %s):\n\n%s" % (name, email, phone, message))
     self.redirect('/contact#email_received')
@@ -93,7 +93,7 @@ class MainHandler(webapp2.RequestHandler):
     page = 'home'
     template_data = {}
 
-    paths = ['buyers', 'about', 'contact', 'listings', 'thereport', 'sellers', 'press']
+    paths = ['buyers', 'about', 'contact', 'listings', 'thereport', 'press', 'team']
     for p in paths:
       if re.match('/%s' % p, self.request.path):
         page = p
@@ -102,9 +102,9 @@ class MainHandler(webapp2.RequestHandler):
       template_data['PAGE'] = 'items.html'
       template_data['newsletters'] = Item.gql('WHERE page=:1 order by ranking desc', page).fetch(1000)
       if page == 'listings':
-        template_data['rented'] = Item.gql('WHERE page=:1 order by ranking desc', 'rented').fetch(1000)
-        if len(template_data['rented']) == 0:
-          template_data['rented'] = [{
+        template_data['closed'] = Item.gql('WHERE page=:1 order by ranking desc', 'rented').fetch(1000)
+        if len(template_data['closed']) == 0:
+          template_data['closed'] = [{
             'link': '/r/images/selling.jpg',
             'images': ['/r/images/selling.jpg'],
             'title': 'Best apartment in the world'
@@ -113,7 +113,7 @@ class MainHandler(webapp2.RequestHandler):
             'images': ['/r/images/selling.jpg'],
             'title': 'Best apartment in the world'
           }]
-          logging.info(template_data['rented'])
+          logging.info(template_data['closed'])
     else:
       template_data['PAGE'] = '%s.html' % page
     template_data['path'] = page

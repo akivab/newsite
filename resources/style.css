@@ -1,11 +1,12 @@
 body {
   background-size:cover;
   background-image:url(/r/images/bg.png);
-  background-color:;
+  background-color:#7989ab;
+  background-repeat:no-repeat;
 }
 
-a,.main,.footer,.contactme > div, .top {
-  font-family:'Arvo', serif;
+body, h1,h2,h3 {
+  font-family: 'Arvo', serif;
 }
 
 .rebny {
@@ -18,7 +19,7 @@ a,.main,.footer,.contactme > div, .top {
   height: 80px;
 }
 
-.maintext, .newsletter, h1, h2, h3, h4, h5 {
+.maintext, .newsletter {
   font-family:'Open Sans', sans-serif;
 }
 
@@ -296,6 +297,12 @@ a.selected, .page-link:hover{
   float:left;
 }
 
+.newsletter .text {
+  position:relative;
+  left: 30px;
+  width: 870px;
+}
+
 .newsletter .text h3 {
   margin: 0;
   line-height: 24px;
@@ -305,12 +312,6 @@ a.selected, .page-link:hover{
 
 .newsletter .text h3 a{
   color:#09f;
-  font-family:'Arvo' serif;
-}
-
-.newsletter .text {
-  display: inline-block;
-  width: 600px;
 }
 
 .social {
@@ -352,10 +353,6 @@ a.selected, .page-link:hover{
   padding-bottom:30px;
 }
 
-.nobg {
-  font-family: 'Arvo', serif;
-}
-
 .closed a {
   color: #A52826;
   font-size: 18px;
@@ -364,6 +361,17 @@ a.selected, .page-link:hover{
 
 .closed a:hover {
   color: #7E2823;
+}
+
+.team_item {
+  clear: both;
+  min-height: 150px;
+}
+
+.team_item img {
+  width: 100px;
+  float: left;
+  padding-right: 20px;
 }
 
 .subscribe {

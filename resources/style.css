@@ -23,7 +23,6 @@ body, h1,h2,h3 {
   font-family:'Open Sans', sans-serif;
 }
 
-
 .main,.footer{
   width:940px;
   color:white;
@@ -136,22 +135,6 @@ a.selected, .page-link:hover{
   margin-left: 15px;
 }
 
-.tab {
-  position:absolute;
-  width:300px;
-  height:100%;
-  line-height:500px;
-  font-size:100px;
-  cursor:pointer;
-  text-align:center;
-  z-index:1;
-  -webkit-transition:background-color 0.2s;
-}
-
-.tab:hover {
-  background-color:rgba(0,0,0,0.5);
-}
-
 .left {
   left:0px;
 }
@@ -178,7 +161,7 @@ a.selected, .page-link:hover{
   margin-right:80px;
 }
 
-.top > span{
+.top span{
   color:#fff;
   text-shadow:0 0 10px #000;
 }
@@ -187,36 +170,6 @@ a.selected, .page-link:hover{
   position:absolute;
   bottom:10px;
   right:0;
-}
-
-#thumbnails {
-  z-index:1;
-  height:70px;
-  right:20px;
-  bottom:-30px;
-  overflow:hidden;
-  position:absolute;
-  background:rgba(256,256,256,0.2);
-}
-
-#thumbnails > img {
-  max-width:120px;
-  height:60px;
-  float:left;
-}
-
-.unselectedimg {
-  margin:3px;
-  margin-top:5px;
-}
-
-.selectedimg {
-  border:3px solid #aaa;
-  margin:3px;
-}
-
-.carousel {
-  position:relative;
 }
 
 #title {
@@ -270,13 +223,13 @@ a.selected, .page-link:hover{
 }
 
 #contact {
-  height:500px;
+  height:360px;
   position:relative;
   background:url('/r/images/buying.jpg');
   background-size:1000px;
 }
 
-#contactform > span {
+#contactform span {
   font-size:36px;  
   line-height:36px;
   padding:20px;
@@ -284,15 +237,15 @@ a.selected, .page-link:hover{
   display:inline-block;
 }
 
-#contactform > form {
+#contactform form {
   width:200px;
   font-family:'Open Sans', sans-serif;
   float:left;
-  margin-left:50px;
+  margin-left:20px;
 }
 
 #dancontact {
-  width:200px;
+  width:150px;
   clear:both;
   float:left;
 }

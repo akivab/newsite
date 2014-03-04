@@ -1,5 +1,5 @@
-{% if path == 'thereport' %}
 <div class="subscribe">
+{% if path == 'thereport' %}
 <div id='emailAlert' style='display:none' class='alert alert-success'>Thanks for subscribing!</div>
 <form action="http://danbamberger.us2.list-manage.com/subscribe/post" method="post"
       target="_blank" onsubmit="document.getElementById('emailAlert').style.display = 'block'">
@@ -11,8 +11,8 @@
     <button type="submit" class="btn">Subscribe</button>
   </div>
 </form>
-</div>
 {% endif %}
+</div>
 
 <div class="newsletters">
   {% for newsletter in newsletters %}

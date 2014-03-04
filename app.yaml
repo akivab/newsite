@@ -1,4 +1,4 @@
-application: s~dan-bamberger 
+application: s~dan-bamberger-v2
 version: 2
 runtime: python27
 threadsafe: no

@@ -11,3 +11,6 @@ class Item(ndb.Model):
   added = ndb.DateTimeProperty(auto_now_add=True)
   ranking = ndb.IntegerProperty(default=0)
 
+class Listings(ndb.Model):
+  text = ndb.TextProperty()
+  added = ndb.DateTimeProperty(auto_now=True)

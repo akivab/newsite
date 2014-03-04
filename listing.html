@@ -1,0 +1,17 @@
+<div class="listing">
+  <h3>
+    <a href="{{ listing.link }}">
+      {{ listing.title }}
+    </a>
+  </h3>
+  {% for image in listing.images %}
+  <img id="img{{forloop.counter}}" class="unselected" src="{{ image }}" />
+  {% endfor %}
+  <br><br>
+  <div class="text">
+    {% if listing.date_posted %}
+    <div class="date">Posted on {{listing.date_posted}}</div>
+    {% endif %}
+    <div>{{listing.text|safe}}</div>
+  </div>
+</div>

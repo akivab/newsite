@@ -1,4 +1,4 @@
-newsite
+Bamberger Group
 =======
 
-New site
+Assets for thebambergergroup.com

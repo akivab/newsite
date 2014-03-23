@@ -17,8 +17,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 ALLOWED_USERS = ['dan@danbamberger.com',
-                 'akiva.bamberger@gmail.com',
-                 'akivab@google.com']
+                 'akiva.bamberger@gmail.com']
 
 def needs_redirect(req):
   if re.search('danbamberger.com', req.request.url):
@@ -136,7 +135,7 @@ class MainHandler(webapp2.RequestHandler):
     email = self.request.get("email")
     phone = self.request.get("phone")
     message = self.request.get("message")
-    mail.send_mail(sender="akivab@google.com",
+    mail.send_mail(sender="akiva.bamberger@gmail.com",
                    to="dan@thebambergergroup.com,akiva.bamberger@gmail.com",
                    subject="Message from danbamberger.com",
                    body="Sent from %s (%s, %s):\n\n%s" % (name, email, phone, message))
